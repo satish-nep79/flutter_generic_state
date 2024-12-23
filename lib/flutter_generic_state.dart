@@ -1,7 +1,6 @@
 library flutter_generic_state;
 
-/// A Calculator.
-class Calculator {
-  /// Returns [value] plus 1.
-  int addOne(int value) => value + 1;
-}
+export 'src/generic_state.dart';
+export 'src/generic_state_builder.dart';
+export 'src/generic_state_config.dart';
+export 'src/generic_state_enums.dart';
