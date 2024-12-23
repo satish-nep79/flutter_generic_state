@@ -12,11 +12,13 @@ class GenericStateBuilder<T> extends StatelessWidget {
     this.onLoading,
     this.onError,
     this.onEmpty,
+    this.onRetry,
   });
 
   final GenericState<T> state;
   final bool Function()? isLoadingOverride;
   final bool Function()? isEmptyCheck;
+  final VoidCallback? onRetry;
   final Widget Function(BuildContext context, T data) onSuccess;
   final Widget Function(BuildContext context)? onLoading;
   final Widget Function(BuildContext context)? onError;
@@ -31,7 +33,19 @@ class GenericStateBuilder<T> extends StatelessWidget {
       );
     } else if (state.isFailure) {
       return Center(
-        child: onError?.call(context) ?? GenericStateConfig.screens.errorScreen,
+        child: onError?.call(context) ??
+            Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                GenericStateConfig.screens.errorScreen,
+                const SizedBox(height: 16),
+                if (onRetry != null)
+                  GenericStateConfig.screens.retryButtonBuilder(
+                    context,
+                    onRetry!,
+                  ),
+              ],
+            ),
       );
     } else if (isEmptyCheck?.call() ?? state.isEmpty) {
       return Center(

@@ -1,5 +1,5 @@
 name: flutter_generic_state
-description: A generic state management package for Flutter
+description: A generic state management package for Flutter that enhances and simplifies state management when used with other state management solutions. This package provides a flexible and reusable way to handle various states in your app.
 version: 0.0.1
 repository: https://github.com/satish-nep79/flutter_generic_state
 
